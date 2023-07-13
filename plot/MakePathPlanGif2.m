@@ -10,7 +10,7 @@ function MakePathPlanGif2(scenario, path1, path2, file_path)
     
     step = 1;
     path_length = length(path1);
-    for frame = 1 : 3 : path_length
+    for frame = 1 : 1 : path_length
         close all;
         
         path = path1(1 : frame);
@@ -19,17 +19,23 @@ function MakePathPlanGif2(scenario, path1, path2, file_path)
         region = PlotEnvironment(scenario);
         PlotPlannedPathArea(path, 1.0, 0.0);
         PlotTruckArea(path(end), true, 1.0, 1.0);
-        PlotTrajectoryLine(path, true, true, true);
+%         PlotTrajectoryLine(path, true, true, true);
         
         set(gca, 'XLim', [region.min_x, region.max_x]);
         set(gca, 'YLim', [region.min_y, region.max_y + legend_buffer]);
-        xlabel('x(m)');
-        ylabel('y(m)');
-        text(20, 12, 'OverShot By Traditional Method', 'FontSize', 10);
-        legend({'Road Center', 'Tractor Body', 'Trailer Body', 'Tractor Path', 'Trailer Path'}, ...
-            'Location','northeast', 'FontSize', 8);
+%         xlabel('x(m)');
+%         ylabel('y(m)');
+        text(20, 12, 'OverShot By Traditional Method', 'FontSize', 10, 'Color', [1, 1,1]);
+%         legend({'\color{white}Road Center', '\color{white}Tractor Body', '\color{white}Trailer Body', '\color{white}Tractor Path', '\color{white}Trailer Path'}, ...
+%             'Location','northeast', 'FontSize', 8,  'color', [0,0,0]);
+        legend({'\color{white}Tractor Body', '\color{white}Trailer Body'}, ...
+            'Location','northeast', 'FontSize', 8,  'color', [0,0,0]);
         axis equal;
-        %         axis off;
+%         axis off;
+        set(gca,'xcolor',[1 1 1]);
+        set(gca,'ycolor',[1 1 1]);
+        set(gca, 'color', [0 0 0]);
+        set(gcf, 'color', [0 0 0]);
         
         path = path2(1 : frame);
         
@@ -37,22 +43,34 @@ function MakePathPlanGif2(scenario, path1, path2, file_path)
         region = PlotEnvironment(scenario);
         PlotPlannedPathArea(path, 1.0, 0.0);
         PlotTruckArea(path(end), true, 1.0, 1.0);
-        PlotTrajectoryLine(path, true, true, true);
+%         PlotTrajectoryLine(path, true, true, true);
         
         set(gca, 'XLim', [region.min_x, region.max_x]);
         set(gca, 'YLim', [region.min_y, region.max_y + legend_buffer]);
-        xlabel('x(m)');
-        ylabel('y(m)');
-        text(20, 12, 'No OverShot By Tractrix Method', 'FontSize', 10);
-        legend({'Road Center', 'Tractor Body', 'Trailer Body', 'Tractor Path', 'Trailer Path'}, ...
-            'Location','northeast', 'FontSize', 8);
-        axis equal;
-%         axis off;
+%         xlabel('x(m)');
+%         ylabel('y(m)');
+       text(20, 12, 'No OverShot By Tractrix Method', 'FontSize', 10, 'Color',[1, 1,1]);
+%        legend({'\color{white}Road Center', '\color{white}Tractor Body', '\color{white}Trailer Body', '\color{white}Tractor Path', '\color{white}Trailer Path'}, ...
+%            'Location','northeast', 'FontSize', 8, 'color', [0,0,0]);
+       legend({'\color{white}Tractor Body', '\color{white}Trailer Body'}, ...
+            'Location','northeast', 'FontSize', 8, 'color', [0,0,0]);
+       axis equal;
+%        axis off;
+       set(gca,'xcolor',[1 1 1]);
+       set(gca,'ycolor',[1 1 1]);
+       set(gca, 'color', [0 0 0]);
+       set(gcf, 'color', [0 0 0]);
+       
+       set(gca, 'color', [0, 0,0]);
+       set(gcf, 'color', [0, 0,0]);
         %% make gif
         pause(0.05);
-        MakeGif([file_path, '\figure\', gif_name], step);
+%         MakeGif([file_path, '\figure\', gif_name], step);
+        export_fig([file_path, '\figure\gif\', num2str(frame)], '-r2400', '-png');
+        MakeGifFromFig([file_path, '\figure\gif\lattice.gif'], [file_path, '\figure\gif\', num2str(frame), '.png'], step);
         step = step + 1;
     end
-    saveas(gcf, [file_path, '\figure\', png_name]);
+%     saveas(gcf, [file_path, '\figure\', png_name]);
     close all;
+    im2gif([file_path, '\figure\gif\']);
 end

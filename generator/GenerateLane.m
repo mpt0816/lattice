@@ -77,6 +77,21 @@ classdef GenerateLane < handle
             lanes = [lane_1, lane_2];
         end
         
+        function lanes = GenerateThreeParallelLanes(obj, pts)
+            lane_1 = obj.GenerateLaneWithPointList(pts);
+            lane2_knots = pts;
+            for i = 1 : 1 : length(pts)
+                lane2_knots(i) = obj.CalculateBoundaryPoint(pts(i), lane_1.lane_width);
+            end
+            lane_2 = obj.GenerateLaneWithPointList(lane2_knots);
+            lane3_knots = pts;
+            for i = 1 : 1 : length(pts)
+                lane3_knots(i) = obj.CalculateBoundaryPoint(lane2_knots(i), lane_2.lane_width);
+            end
+            lane_3 = obj.GenerateLaneWithPointList(lane3_knots);
+            lanes = [lane_1, lane_2, lane_3];
+        end
+        
         function lane = GenerateLaneWithTwoPoint(obj, start_pt, end_pt)
             lane.resolution = obj.resolution_;
             lane.lane_width = obj.lane_width_;

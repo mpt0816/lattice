@@ -29,9 +29,9 @@ classdef LatticePlanner < handle
                 start_point = obj.InferFrontAxeCenterFromRearAxeCenter(start_point);
             end
             
-            lane_change_length = 30;
-            start_state = [-3.75, 0.0, 0.0];
-            end_state = [0.0, 0.0, 0.0];
+            lane_change_length = 80;
+            start_state = [0.0, 0.0, 0.0];
+            end_state = [0.3, 0.0, 0.0];
             
             sl_curve = QuinticPolynomialCurve1d(start_state(1), start_state(2), start_state(3), ...
                                                 end_state(1), end_state(2), end_state(3), lane_change_length);

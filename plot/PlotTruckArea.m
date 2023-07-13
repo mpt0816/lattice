@@ -19,12 +19,12 @@ function PlotTruckArea(planned_path_point, handlevisibility, facealpha, edgealph
     set(p1, 'edgealpha', edgealpha);
     hold on;
 
-    trailer_color = [255 215 0] / 255;  %% Gold
-    p2 = fill([trailer_coners(1).x, trailer_coners(2).x, trailer_coners(3).x, trailer_coners(4).x], ...
-            [trailer_coners(1).y, trailer_coners(2).y, trailer_coners(3).y, trailer_coners(4).y], trailer_color, 'facealpha', facealpha);
-    if ~handlevisibility 
-        set(p2, 'handlevisibility', 'off'); 
-    end
-    set(p2, 'edgealpha', edgealpha);
-    hold on;
+%     trailer_color = [255 215 0] / 255;  %% Gold
+%     p2 = fill([trailer_coners(1).x, trailer_coners(2).x, trailer_coners(3).x, trailer_coners(4).x], ...
+%             [trailer_coners(1).y, trailer_coners(2).y, trailer_coners(3).y, trailer_coners(4).y], trailer_color, 'facealpha', facealpha);
+%     if ~handlevisibility 
+%         set(p2, 'handlevisibility', 'off'); 
+%     end
+%     set(p2, 'edgealpha', edgealpha);
+%     hold on;
 end
